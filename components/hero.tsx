@@ -23,9 +23,13 @@ export function Hero({ className, ...props }: ComponentProps<"section">) {
         className="-z-20 object-cover"
       />
       <div aria-hidden className="absolute inset-0 -z-10 bg-black/55" />
-      <h1 className="font-heading text-5xl font-bold tracking-tight text-white sm:text-7xl">
-        Mia Printing
+      <h1 className="font-heading max-w-4xl text-4xl font-bold tracking-tight text-balance text-white sm:text-6xl">
+        Satu Tempat untuk Semua Kebutuhan Cetak Anda
       </h1>
+      <p className="mt-6 max-w-2xl text-lg text-pretty text-white/80 sm:text-xl">
+        Digital printing, offset, sablon, hingga reklame untuk perusahaan maupun
+        personal, dengan kualitas terbaik dan harga bersaing.
+      </p>
     </section>
   )
 }
