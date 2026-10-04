@@ -1,6 +1,8 @@
 import type { ComponentProps } from "react"
 import Image from "next/image"
+import { ArrowDown, ArrowRight } from "lucide-react"
 
+import { Button } from "@/components/ui/button"
 import { cn } from "@/lib/utils"
 import heroBackground from "@/public/hero-background.webp"
 
@@ -30,6 +32,25 @@ export function Hero({ className, ...props }: ComponentProps<"section">) {
         Digital printing, offset, sablon, hingga reklame untuk perusahaan maupun
         personal, dengan kualitas terbaik dan harga bersaing.
       </p>
+      <div className="mt-10 flex flex-col items-center gap-3 sm:flex-row sm:gap-4">
+        <Button className="h-12 rounded-full border-white/15 bg-white/10 px-6 text-base text-white backdrop-blur-sm hover:bg-white/20 has-data-[icon=inline-end]:pr-5">
+          Pesan Sekarang
+          <ArrowRight
+            data-icon="inline-end"
+            className="transition-transform group-hover/button:translate-x-0.5"
+          />
+        </Button>
+        <Button
+          variant="ghost"
+          className="h-12 rounded-full px-6 text-base text-white hover:bg-white/10 hover:text-white has-data-[icon=inline-end]:pr-5 dark:hover:bg-white/10"
+        >
+          Lihat Layanan
+          <ArrowDown
+            data-icon="inline-end"
+            className="transition-transform group-hover/button:translate-y-0.5"
+          />
+        </Button>
+      </div>
     </section>
   )
 }
