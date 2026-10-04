@@ -1,12 +1,38 @@
+/*
+ * Stylesheet global aplikasi (di-import sekali di app/layout.tsx).
+ *
+ * Isi file ini berurutan:
+ *   1. Import Tailwind CSS v4 dan plugin pendukung.
+ *   2. Varian `dark:` berbasis class `.dark`.
+ *   3. `@theme inline`  — memetakan CSS variable menjadi utility Tailwind.
+ *   4. `:root`/`.dark`  — nilai warna design token untuk mode terang & gelap.
+ *   5. `@layer base`    — style dasar untuk semua elemen.
+ *
+ * Untuk mengganti warna brand, cukup ubah nilai di `:root` (dan `.dark`);
+ * semua komponen otomatis mengikuti.
+ */
+
+/* Tailwind CSS v4 (diproses oleh plugin di postcss.config.mjs). */
 @import "tailwindcss";
+/* Utility animasi (animate-in, fade-in, slide-in, dll.) untuk komponen shadcn. */
 @import "tw-animate-css";
+/* Style dasar & varian tambahan yang dibutuhkan komponen shadcn/ui. */
 @import "shadcn/tailwind.css";
 
+/* Varian `dark:` aktif untuk elemen di dalam ancestor ber-class `.dark`
+   (bukan mengikuti setelan OS). Saat ini belum ada yang memasang class
+   `.dark`, jadi aplikasi selalu tampil dalam mode terang. */
 @custom-variant dark (&:is(.dark *));
 
+/* Mendaftarkan design token sebagai utility Tailwind.
+   Contoh: `--color-primary` → class `bg-primary`, `text-primary`, `border-primary`;
+   `--font-heading` → class `font-heading`; `--radius-lg` → class `rounded-lg`.
+   `inline` berarti utility memakai `var(--...)` secara langsung, sehingga
+   nilainya ikut berubah saat token di `:root`/`.dark` berganti. */
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
+  /* Font: variabel `--font-geist-*` & `--font-comfortaa` dibuat oleh next/font di app/layout.tsx. */
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
   --font-heading: var(--font-comfortaa);
@@ -39,6 +65,7 @@
   --color-popover: var(--popover);
   --color-card-foreground: var(--card-foreground);
   --color-card: var(--card);
+  /* Skala radius sudut, semuanya diturunkan dari satu nilai `--radius`. */
   --radius-sm: calc(var(--radius) * 0.6);
   --radius-md: calc(var(--radius) * 0.8);
   --radius-lg: var(--radius);
@@ -48,6 +75,9 @@
   --radius-4xl: calc(var(--radius) * 2.6);
 }
 
+/* Design token mode terang (default).
+   Warna ditulis dalam format oklch(lightness chroma hue); chroma 0 = abu-abu
+   netral. Pasangan `--x` / `--x-foreground` = warna latar / warna teks di atasnya. */
 :root {
   --background: oklch(1 0 0);
   --foreground: oklch(0.145 0 0);
@@ -72,6 +102,7 @@
   --chart-3: oklch(0.439 0 0);
   --chart-4: oklch(0.371 0 0);
   --chart-5: oklch(0.269 0 0);
+  /* Radius dasar (10px); skala `rounded-*` dihitung dari nilai ini di @theme. */
   --radius: 0.625rem;
   --sidebar: oklch(0.985 0 0);
   --sidebar-foreground: oklch(0.145 0 0);
@@ -83,6 +114,7 @@
   --sidebar-ring: oklch(0.708 0 0);
 }
 
+/* Design token mode gelap: menimpa nilai :root saat class `.dark` terpasang. */
 .dark {
   --background: oklch(0.145 0 0);
   --foreground: oklch(0.985 0 0);
@@ -117,13 +149,17 @@
   --sidebar-ring: oklch(0.556 0 0);
 }
 
+/* Style dasar global. */
 @layer base {
+  /* Warna border & outline default untuk semua elemen mengikuti token. */
   * {
     @apply border-border outline-ring/50;
   }
+  /* Warna latar & teks halaman. */
   body {
     @apply bg-background text-foreground;
   }
+  /* Font default seluruh situs: Geist Sans. */
   html {
     @apply font-sans;
   }

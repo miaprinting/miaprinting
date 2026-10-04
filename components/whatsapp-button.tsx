@@ -1,7 +1,23 @@
+/**
+ * Tombol WhatsApp mengambang (floating action button).
+ *
+ * Dirender sekali di `app/layout.tsx`, sehingga selalu tampil di pojok kanan
+ * bawah pada setiap halaman.
+ */
 import type { ComponentProps } from "react"
 
 import { cn } from "@/lib/utils"
 
+/**
+ * Komponen tombol chat WhatsApp.
+ *
+ * Menerima semua props bawaan elemen `<button>` (mis. `onClick`), dan
+ * `className` dari luar digabung dengan class default melalui `cn()`.
+ *
+ * TODO: tombol ini belum membuka chat. Untuk menghubungkannya, ganti elemen
+ * `<button>` dengan `<a href="https://wa.me/<nomor>" target="_blank">` atau
+ * tambahkan handler `onClick`.
+ */
 export function WhatsAppButton({
   className,
   ...props
@@ -9,13 +25,18 @@ export function WhatsAppButton({
   return (
     <button
       type="button"
+      // Tombol hanya berisi ikon, jadi label ini yang dibacakan screen reader.
       aria-label="Chat via WhatsApp"
       className={cn(
+        // `fixed` + `z-50`: menempel di pojok kanan bawah, di atas konten lain.
+        // `#25D366` adalah warna hijau resmi WhatsApp.
         "fixed right-4 bottom-4 z-50 flex size-14 items-center justify-center rounded-full bg-[#25D366] text-white shadow-lg shadow-black/25 transition-transform outline-none hover:scale-105 focus-visible:ring-4 focus-visible:ring-[#25D366]/50 active:scale-95 sm:right-6 sm:bottom-6",
         className
       )}
       {...props}
     >
+      {/* Logo WhatsApp (SVG inline). `fill="currentColor"` mengikuti warna
+          teks tombol (putih). */}
       <svg
         aria-hidden
         viewBox="0 0 24 24"
