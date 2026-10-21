@@ -15,18 +15,8 @@ import Link from "next/link"
 import { Menu, X } from "lucide-react"
 
 import { Button, buttonVariants } from "@/components/ui/button"
+import { NAV_ITEMS } from "@/lib/navigation"
 import { cn } from "@/lib/utils"
-
-/**
- * Daftar menu navigasi beserta halaman tujuannya, urut dari kiri ke kanan.
- */
-const NAV_ITEMS: { label: string; href: string }[] = [
-  { label: "Beranda", href: "/" },
-  { label: "Tentang", href: "/tentang" },
-  { label: "Portofolio", href: "/portofolio" },
-  { label: "Layanan", href: "/layanan" },
-  { label: "Kontak", href: "/kontak" },
-]
 
 /**
  * Efek kaca yang dipakai bersama oleh bilah utama dan panel menu mobile.

@@ -10,6 +10,7 @@ import type { Metadata } from "next";
 import { Comfortaa, Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { Analytics } from "@vercel/analytics/next"
+import { Footer } from "@/components/footer"
 import { Navbar } from "@/components/navbar"
 import { WhatsAppButton } from "@/components/whatsapp-button"
 
@@ -69,6 +70,8 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
         {/* Navbar kaca mengambang, tampil di semua halaman. */}
         <Navbar />
         {children}
+        {/* Footer, tampil di bawah isi setiap halaman. */}
+        <Footer />
         {/* Tombol chat WhatsApp mengambang, tampil di semua halaman. */}
         <WhatsAppButton />
         {/* Vercel Web Analytics: mencatat kunjungan halaman saat di-deploy ke Vercel. */}
