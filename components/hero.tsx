@@ -6,9 +6,10 @@
  */
 import type { ComponentProps } from "react"
 import Image from "next/image"
-import { ArrowDown, ArrowRight } from "lucide-react"
+import Link from "next/link"
+import { ArrowRight } from "lucide-react"
 
-import { Button } from "@/components/ui/button"
+import { Button, buttonVariants } from "@/components/ui/button"
 import { cn } from "@/lib/utils"
 // Import statis: Next.js otomatis membaca ukuran gambar dan membuat
 // placeholder blur, sehingga `width`/`height` tidak perlu ditulis manual.
@@ -71,18 +72,25 @@ export function Hero({ className, ...props }: ComponentProps<"section">) {
             className="transition-transform group-hover/button:translate-x-0.5"
           />
         </Button>
-        {/* CTA sekunder.
-            TODO: belum ada aksi — arahkan ke section layanan saat sudah dibuat. */}
-        <Button
-          variant="ghost"
-          className="h-12 rounded-full px-6 text-base text-white hover:bg-white/10 hover:text-white has-data-[icon=inline-end]:pr-5 dark:hover:bg-white/10"
+        {/* CTA sekunder: link ke halaman Layanan dengan tampilan tombol
+            `ghost`. `cn()` agar class di sini menimpa class bawaan
+            `buttonVariants` yang bentrok (mis. `rounded-lg`, `text-sm`). */}
+        <Link
+          href="/layanan"
+          className={cn(
+            buttonVariants({
+              variant: "ghost",
+              className:
+                "h-12 rounded-full px-6 text-base text-white hover:bg-white/10 hover:text-white has-data-[icon=inline-end]:pr-5 dark:hover:bg-white/10",
+            })
+          )}
         >
           Lihat Layanan
-          <ArrowDown
+          <ArrowRight
             data-icon="inline-end"
-            className="transition-transform group-hover/button:translate-y-0.5"
+            className="transition-transform group-hover/button:translate-x-0.5"
           />
-        </Button>
+        </Link>
       </div>
     </section>
   )

@@ -10,6 +10,7 @@ import type { Metadata } from "next";
 import { Comfortaa, Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { Analytics } from "@vercel/analytics/next"
+import { Navbar } from "@/components/navbar"
 import { WhatsAppButton } from "@/components/whatsapp-button"
 
 // Font dimuat lewat `next/font/google` agar di-host sendiri oleh Next.js
@@ -65,6 +66,8 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       {/* `flex flex-col` + `min-h-full` agar <main> di halaman bisa memakai
           `flex-1` untuk mengisi sisa tinggi layar. */}
       <body className="min-h-full flex flex-col">
+        {/* Navbar kaca mengambang, tampil di semua halaman. */}
+        <Navbar />
         {children}
         {/* Tombol chat WhatsApp mengambang, tampil di semua halaman. */}
         <WhatsAppButton />
